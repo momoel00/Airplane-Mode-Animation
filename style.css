@@ -1,0 +1,306 @@
+* {
+  border: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --hue: 223;
+  --bg1: hsl(var(--hue), 10%, 90%);
+  --bg2: hsl(var(--hue), 10%, 60%);
+  --fg: hsl(var(--hue), 10%, 10%);
+  --trans-dur: 0.3s;
+  font-size: calc(20px + (40 - 20) * (100vw - 320px) / (2560 - 320));
+}
+
+body,
+input {
+  font: 1em/1.5 sans-serif;
+}
+
+body {
+  background-image: linear-gradient(135deg, var(--bg1), var(--bg2));
+  background-position: center;
+  color: var(--fg);
+  display: flex;
+  height: 100vh;
+}
+
+.am,
+.am__crack,
+.am__input {
+  border-radius: 50%;
+}
+
+.am,
+.am__input {
+  margin: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.am {
+  background-image: linear-gradient(-45deg, var(--bg1), var(--bg2));
+  position: relative;
+  width: 5em;
+  height: 5em;
+}
+
+.am__crack {
+  background-color: hsl(0, 0%, 0%);
+  box-shadow: 0 0 0.5em hsla(var(--hue), 90%, 70%, 0);
+  display: block;
+  position: absolute;
+  top: 0.25em;
+  left: 0.25em;
+  width: 4.5em;
+  height: 4.5em;
+  transition:
+    background-color 0.15s linear,
+    box-shadow 0.15s linear,
+    opacity var(--trans-dur) ease-in-out;
+}
+
+.am__input {
+  background-image:
+    linear-gradient(-45deg, hsl(var(--hue), 90%, 40%) 10%, hsl(var(--hue), 90%, 50%), hsl(var(--hue), 90%, 60%) 90%);
+  box-shadow:
+    0.1em 0.1em 0.1em hsla(var(--hue), 90%, 90%, 0.5) inset,
+    -0.1em -0.1em 0.1em hsla(var(--hue), 90%, 10%, 0.5) inset;
+  display: block;
+  filter: grayscale(0.9);
+  position: absolute;
+  top: 0.375em;
+  left: 0.375em;
+  width: 4.25em;
+  height: 4.25em;
+  transition:
+    filter var(--trans-dur) ease-in-out,
+    transform var(--trans-dur) ease-in-out;
+  -webkit-appearance: none;
+  appearance: none;
+  z-index: 1;
+}
+
+.am__plane,
+.am__plane-body,
+.am__plane-body:before,
+.am__plane-body:after,
+.am__plane-engines,
+.am__plane-engines:before,
+.am__plane-engines:after,
+.am__plane-fins,
+.am__plane-fins:before,
+.am__plane-fins:after,
+.am__plane-wings,
+.am__plane-wings:before,
+.am__plane-wings:after,
+.am__smoke {
+  display: block;
+  position: absolute;
+}
+
+.am__plane-body:before,
+.am__plane-body:after,
+.am__plane-engines:before,
+.am__plane-engines:after,
+.am__plane-fins:before,
+.am__plane-fins:after,
+.am__plane-wings:before,
+.am__plane-wings:after {
+  content: "";
+}
+
+.am__plane {
+  animation: planeLand 1s cubic-bezier(0.6, 0, 0.4, 1);
+  filter: drop-shadow(0.25em 0.25em 0.25em hsla(0, 0%, 0%, 0.3));
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+}
+
+.am__plane-body {
+  background-image:
+    radial-gradient(0.125em 0.125em at 25% 50%, hsl(0, 90%, 40%) 48%, hsla(0, 90%, 40%, 0) 50%),
+    linear-gradient(hsl(0, 0%, 100%) 30%, hsl(var(--hue), 10%, 80%) 70%);
+  border-radius: 1em 1.5em 1.5em 1em / 50% 50% 50% 50%;
+  overflow: hidden;
+  width: 3em;
+  height: 0.4em;
+  transform: translate(-50%, -50%);
+}
+
+.am__plane-body:before {
+  border-radius: 50%;
+  box-shadow: 0.1em 0 0 hsl(var(--hue), 10%, 10%) inset;
+  left: 0.2em;
+  width: 0.25em;
+  height: 100%;
+}
+
+.am__plane-body:after {
+  background-color: hsl(var(--hue), 10%, 70%);
+  top: 0.15em;
+  right: 0;
+  width: 1em;
+  height: 0.1em;
+}
+
+.am__plane-engines {
+  top: 50%;
+  left: -0.5em;
+}
+
+.am__plane-engines:before,
+.am__plane-engines:after {
+  border-radius: 0 0.25em 0.25em 0 / 0 50% 50% 0;
+  width: 0.5em;
+  height: 0.25em;
+  transform-origin: 50% 0;
+}
+
+.am__plane-engines:before {
+  background-image: linear-gradient(hsl(0, 0%, 100%) 20%, hsl(var(--hue), 10%, 80%) 80%);
+  transform: translateY(-1em);
+}
+
+.am__plane-engines:after {
+  background-image: linear-gradient(hsl(var(--hue), 10%, 80%) 20%, hsl(0, 0%, 100%) 80%);
+  transform: translateY(1em) scaleY(-1);
+}
+
+.am__plane-fins {
+  top: 50%;
+  left: 0.75em;
+}
+
+.am__plane-fins:before,
+.am__plane-fins:after {
+  background-image: linear-gradient(53deg, hsl(0, 0%, 100%) 44%, hsl(var(--hue), 10%, 70%));
+  clip-path: polygon(0 0, 70% 0, 100% 100%, 75% 100%, 0 0);
+  width: 0.75em;
+  height: 0.75em;
+  transform-origin: 50% 0;
+}
+
+.am__plane-fins:after {
+  transform: scaleY(-1);
+}
+
+.am__plane-wings {
+  top: 50%;
+  left: -0.75em;
+}
+
+.am__plane-wings:before,
+.am__plane-wings:after {
+  background-image: linear-gradient(63deg, hsl(0, 0%, 100%) 44%, hsl(var(--hue), 10%, 70%));
+  clip-path: polygon(0 0, 80% 0, 100% 100%, 75% 100%, 0 0);
+  width: 1em;
+  height: 1.5em;
+  transform-origin: 50% 0;
+}
+
+.am__plane-wings:after {
+  transform: scaleY(-1);
+}
+
+.am__smoke {
+  background-image: radial-gradient(hsl(0, 0%, 100%), hsla(0, 0%, 100%, 0));
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  top: calc(50% - 0.125em);
+  left: calc(50% - 0.125em);
+  width: 0.25em;
+  height: 0.25em;
+  z-index: 2;
+}
+
+.am__sr {
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+}
+
+/* `:focus(-visible)` */
+.am__input:focus {
+  outline: transparent;
+}
+
+.am__input:focus~.am__crack {
+  background-color: hsl(var(--hue), 90%, 70%);
+  box-shadow: 0 0 0.5em hsla(var(--hue), 90%, 70%, 1);
+}
+
+@supports selector(:focus-visible) {
+  .am__input:focus~.am__crack {
+    background-color: hsl(0, 0%, 0%);
+    box-shadow: 0 0 0.5em hsla(var(--hue), 90%, 70%, 0);
+  }
+
+  .am__input:focus-visible~.am__crack {
+    background-color: hsl(var(--hue), 90%, 70%);
+    box-shadow: 0 0 0.5em hsla(var(--hue), 90%, 70%, 1);
+  }
+}
+
+/* `:checked` */
+.am__input:checked {
+  filter: grayscale(0);
+  transform: scale(0.96);
+}
+
+.am__input:checked~.am__crack {
+  opacity: 0.8;
+}
+
+.am__input:checked~.am__plane {
+  animation-name: planeTakeOff;
+  animation-fill-mode: forwards;
+}
+
+/* `:indeterminate` */
+.am__input:indeterminate~.am__plane {
+  animation: none;
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg1: hsl(var(--hue), 10%, 40%);
+    --bg2: hsl(var(--hue), 10%, 10%);
+    --fg: hsl(var(--hue), 10%, 90%);
+  }
+}
+
+/* Animations */
+@keyframes planeLand {
+  from {
+    filter: drop-shadow(0.25em 0.25em 0.5em hsla(0, 0%, 0%, 0.3));
+    transform: translate3d(0, -2.5em, 0) rotate(1turn) translate3d(0, 2.5em, 0);
+  }
+
+  to {
+    filter: drop-shadow(0.25em 0.25em 0.25em hsla(0, 0%, 0%, 0.3));
+    transform: translate3d(0, -2.5em, 0) rotate(2turn) translate3d(0, 2.5em, 0);
+  }
+}
+
+@keyframes planeTakeOff {
+  from {
+    filter: drop-shadow(0.25em 0.25em 0.25em hsla(0, 0%, 0%, 0.3));
+    transform: translate3d(0, -2.5em, 0) rotate(0) translate3d(0, 2.5em, 0) scale(1);
+  }
+
+  30% {
+    filter: drop-shadow(0.25em 0.25em 0.25em hsla(0, 0%, 0%, 0.3));
+    transform: translate3d(0, -2.5em, 0) rotate(0) translate3d(0, 2.5em, 0) scale(0.96);
+  }
+
+  to {
+    filter: drop-shadow(0.25em 0.25em 0.5em hsla(0, 0%, 0%, 0.3));
+    transform: translate3d(0, -2.5em, 0) rotate(1turn) translate3d(0, 2.5em, 0) scale(1);
+  }
+}
